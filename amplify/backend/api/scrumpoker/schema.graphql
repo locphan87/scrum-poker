@@ -1,0 +1,17 @@
+type Ticket @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  title: String!
+  room: Room @hasOne
+  status: RoomStatus!
+}
+
+enum RoomStatus {
+  OPEN
+  CLOSED
+}
+
+type Room @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  title: String!
+  status: RoomStatus!
+}
