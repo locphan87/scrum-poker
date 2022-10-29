@@ -16,5 +16,11 @@ export type AmplifyDependentResourcesAttributes = {
             "AppClientIDWeb": "string",
             "AppClientID": "string"
         }
+    },
+    "storage": {
+        "s3scrumpokerstorage91339e07": {
+            "BucketName": "string",
+            "Region": "string"
+        }
     }
 }

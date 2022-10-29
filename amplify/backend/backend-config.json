@@ -34,8 +34,8 @@
           "EMAIL"
         ],
         "signupAttributes": [
-          "NAME",
-          "EMAIL"
+          "EMAIL",
+          "NAME"
         ],
         "passwordProtectionSettings": {
           "passwordPolicyMinLength": 8,
@@ -54,6 +54,13 @@
           "EMAIL"
         ]
       }
+    }
+  },
+  "storage": {
+    "s3scrumpokerstorage91339e07": {
+      "service": "S3",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": []
     }
   }
 }

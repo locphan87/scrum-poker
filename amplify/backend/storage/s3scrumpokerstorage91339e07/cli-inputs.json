@@ -1,0 +1,10 @@
+{
+  "resourceName": "s3scrumpokerstorage91339e07",
+  "bucketName": "scrum-poker-storage-91339e07",
+  "policyUUID": "b4cabc4c",
+  "storageAccess": "auth",
+  "guestAccess": [],
+  "authAccess": [
+    "READ"
+  ]
+}
