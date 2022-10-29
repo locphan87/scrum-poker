@@ -1,8 +1,26 @@
+enum StoryPoint {
+  P1
+  P2
+  P3
+  P5
+  P8
+  P13
+  P20
+}
+
+type Estimation @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  point: StoryPoint
+  Ticket: Ticket @hasOne
+  owner: String
+}
+
 type Ticket @model @auth(rules: [{allow: public}]) {
   id: ID!
   title: String!
-  room: Room @hasOne
+  Room: Room @hasOne
   status: RoomStatus!
+  owner: String
 }
 
 enum RoomStatus {
@@ -14,4 +32,6 @@ type Room @model @auth(rules: [{allow: public}]) {
   id: ID!
   title: String!
   status: RoomStatus!
+  owner: String
 }
+ 

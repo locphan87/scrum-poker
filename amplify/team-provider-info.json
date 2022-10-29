@@ -14,6 +14,9 @@
     "categories": {
       "auth": {
         "scrumpoker": {}
+      },
+      "storage": {
+        "s3scrumpokerstorage91339e07": {}
       }
     }
   }

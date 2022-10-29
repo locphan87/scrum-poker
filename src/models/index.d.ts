@@ -2,9 +2,23 @@ import { ModelInit, MutableModel } from "@aws-amplify/datastore";
 // @ts-ignore
 import { LazyLoading, LazyLoadingDisabled, AsyncItem } from "@aws-amplify/datastore";
 
+export enum StoryPoint {
+  P1 = "P1",
+  P2 = "P2",
+  P3 = "P3",
+  P5 = "P5",
+  P8 = "P8",
+  P13 = "P13",
+  P20 = "P20"
+}
+
 export enum RoomStatus {
   OPEN = "OPEN",
   CLOSED = "CLOSED"
+}
+
+type EstimationMetaData = {
+  readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
 type TicketMetaData = {
@@ -15,11 +29,38 @@ type RoomMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
+type EagerEstimation = {
+  readonly id: string;
+  readonly point?: StoryPoint | keyof typeof StoryPoint | null;
+  readonly Ticket?: Ticket | null;
+  readonly owner?: string | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+  readonly estimationTicketId?: string | null;
+}
+
+type LazyEstimation = {
+  readonly id: string;
+  readonly point?: StoryPoint | keyof typeof StoryPoint | null;
+  readonly Ticket: AsyncItem<Ticket | undefined>;
+  readonly owner?: string | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+  readonly estimationTicketId?: string | null;
+}
+
+export declare type Estimation = LazyLoading extends LazyLoadingDisabled ? EagerEstimation : LazyEstimation
+
+export declare const Estimation: (new (init: ModelInit<Estimation, EstimationMetaData>) => Estimation) & {
+  copyOf(source: Estimation, mutator: (draft: MutableModel<Estimation, EstimationMetaData>) => MutableModel<Estimation, EstimationMetaData> | void): Estimation;
+}
+
 type EagerTicket = {
   readonly id: string;
   readonly title: string;
-  readonly room?: Room | null;
+  readonly Room?: Room | null;
   readonly status: RoomStatus | keyof typeof RoomStatus;
+  readonly owner?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
   readonly ticketRoomId?: string | null;
@@ -28,8 +69,9 @@ type EagerTicket = {
 type LazyTicket = {
   readonly id: string;
   readonly title: string;
-  readonly room: AsyncItem<Room | undefined>;
+  readonly Room: AsyncItem<Room | undefined>;
   readonly status: RoomStatus | keyof typeof RoomStatus;
+  readonly owner?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
   readonly ticketRoomId?: string | null;
@@ -45,6 +87,7 @@ type EagerRoom = {
   readonly id: string;
   readonly title: string;
   readonly status: RoomStatus | keyof typeof RoomStatus;
+  readonly owner?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -53,6 +96,7 @@ type LazyRoom = {
   readonly id: string;
   readonly title: string;
   readonly status: RoomStatus | keyof typeof RoomStatus;
+  readonly owner?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
